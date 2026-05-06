@@ -360,10 +360,8 @@ export class PayoutView extends MobxLitElement {
     item: ScaleSurveyPayoutItemResult,
     currency: PayoutCurrency,
   ) {
-    // round item.earnedPayoff;
     const roundedEarnedPayoff = Math.round(item.earnedPayoff * 1000) / 1000;
     const total = item.baseAmountEarned + roundedEarnedPayoff;
-
     return html`
       <div class="scoring-bundle">
         <h2>${item.name}</h2>

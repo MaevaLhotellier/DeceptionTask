@@ -158,10 +158,11 @@ export class ParticipantView extends MobxLitElement {
 
   private renderBootedPopup() {
     const isExperimenter = this.authService.isExperimenter;
+    const status = this.participantService.profile?.currentStatus;
     if (
       isExperimenter ||
-      this.participantService.profile?.currentStatus !==
-        ParticipantStatus.BOOTED_OUT
+      (status !== ParticipantStatus.BOOTED_OUT &&
+        status !== ParticipantStatus.ATTENTION_TIMEOUT)
     ) {
       return nothing;
     }

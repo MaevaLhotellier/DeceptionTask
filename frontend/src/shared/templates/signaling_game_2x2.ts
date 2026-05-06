@@ -67,14 +67,17 @@ export function getSignalingGame2x2StageConfigs(): StageConfig[] {
     INTRO_STAGE_5,
     COMPREHENSION_STAGE,
     SG_Block1,
+    POST_SURVEY_STAGE1,
     ...getGameTransferStages('Block 2', 1),
     SG_Block2,
+    POST_SURVEY_STAGE2,
     ...getGameTransferStages('Block 3', 2),
     SG_Block3,
+    POST_SURVEY_STAGE3,
     INTRO_BEFORE_SURVEY_STAGE,
     SURVEY_STAGE1,
     SURVEY_STAGE3,
-    SURVEY_STAGE2,
+    //SURVEY_STAGE2,
     PAYOUT_STAGE,
     COMMUNICATION_STAGE,
   ];
@@ -111,7 +114,7 @@ By clicking the consent button below, you assert that:
 * **You agree to take part in this study**
 
 
-After clicking the consent button, you will be  able to click "Next stage" on the bottom right corner to proceed.
+After clicking the consent button, you will be able to click "Next stage" on the bottom right corner to proceed.
   `,
   ],
 });
@@ -195,8 +198,10 @@ const Sound_CHECK_STAGE = createInfoStage({
   name: 'Audio Check',
   infoLines: [
     `# 🎧 Audio Check
-Please ensure your audio is turned on. Since this is a multiplayer game, there will be waiting times; we will play a sound to alert you when it is your turn to act. \\
-After hearing the audio, click the 'I can hear the sound' confirmation button. \\
+Please ensure your audio is turned on. Since this is a multiplayer game, there will be waiting times; we will play a sound to alert you when it is your turn to act.
+
+After hearing the audio, click the 'I can hear the sound' confirmation button.
+
 Then, use the 'Next stage' button at the bottom right of your screen to move forward.
 `,
   ],
@@ -216,7 +221,6 @@ They have **insider info**. They know the true state of the market and send a me
 
 ## **2. Vendor**
 They receive the Advisor's message and must choose which market to enter. Their decision determines the final earnings for **both** them and the Advisor.
-
 
 
 ---
@@ -244,6 +248,13 @@ This market has two possible states: half of the time it is **Busy**, and the ot
 
 > **Important Note:** The Advisor has the insider information and is the only person who knows in advance whether Market Beta is busy or quiet on any given day.
 
+# **💰Earning Matrix**
+| Market Options | Situation | Vendor's earnings | Advisor's earnings |
+| :--- | :--- | :---: | :---: |
+| Alpha Market | ⚪Stable | 20 | **30** |
+| Beta Exchange | 🔵Scenario 1: Busy | **36** | 0 |
+| (Beta Exchange) | 🔴Scenario 2: Quiet | 4 | 20 |
+
 `,
   ],
 });
@@ -256,7 +267,7 @@ const INTRO_STAGE_3 = createInfoStage({
   id: 'sg_intro_3',
   name: 'Timing & Automated Actions',
   infoLines: [
-    `**In each round, you have 15 Seconds to make your choice.**
+    `**In each round, you have 15 seconds to make your choice.**
 
 ---
 
@@ -488,7 +499,7 @@ const COMPREHENSION_STAGE = createComprehensionStage({
       {
         id: CQ6_ID,
         questionTitle:
-          'If the Beta Market is busy, which choice gives the **Vendor** a higher payoff?',
+          'If the Beta Market is busy, which choice gives the **Vendor** a higher payoff?(You can go back to the <Market Introduction> page to check the specific earnings)',
         options: [CQ6_A, CQ6_B],
       },
       CQ6_B.id,
@@ -552,6 +563,7 @@ const SHARED_SR_CONFIG = {
   enableTruthfulnessFeature: true,
   recommendationTextPrefix: ' ',
   senderTimeLimitInSeconds: 15,
+  receiverTimeLimitInSeconds: 15,
   trueStatePrefix: 'Current state for',
   probabilityDisplayPrefix: '(Automatic-Message likelihood)',
   showPayoffFeedback: true,
@@ -780,12 +792,12 @@ const ROLE_SURVEY_STAGE = createSurveyStage({
 });
 const SURVEY_STAGE1 = createSurveyStage({
   id: 'lit_survey_1',
-  name: 'Questionnaire Part 1/3',
+  name: 'Questionnaire Part 1/2',
   descriptions: createStageTextConfig({}),
   questions: [
     createScaleSurveyQuestion({
       questionTitle:
-        '### Please estimate the behavior of players in general.\n\nOut of 100 advisors in one day, how many do you think send "Beta is busy" while in reality Beta is quiet? ',
+        '### Please estimate the behavior of players in general.\n\nOut of 100 advisors in one day, how many do you think send "Beta is quiet" while in reality Beta is busy? ',
       lowerValue: 0,
       upperValue: 100,
       lowerText: '0% (No one)',
@@ -836,7 +848,7 @@ const SURVEY_STAGE1 = createSurveyStage({
 
     createScaleSurveyQuestion({
       questionTitle:
-        'To what extent de advisors’ behaviors were intended to help the vendor? If you were the advisor, answer for yourself.',
+        'To what extent do advisors’ behaviors were intended to help the vendor? If you were the advisor, answer for yourself.',
       lowerValue: 0,
       upperValue: 100,
       lowerText: 'Not at all',
@@ -846,7 +858,18 @@ const SURVEY_STAGE1 = createSurveyStage({
 
     createScaleSurveyQuestion({
       questionTitle:
-        'When the advisor was being deshonest, to what extent do you think this was intentional? If you were the advisor, answer for yourself.',
+        '### Suppose that in a given round, the actual Beta market state was indeed "Busy". Based on the actual interaction during the game:\n\nHow moral was the Advisor\'s behavior?',
+      lowerValue: 0,
+      upperValue: 100,
+      lowerText: 'Completely Immoral',
+      middleText: 'Neither Moral nor Immoral',
+      upperText: 'Completely Moral',
+      useSlider: true,
+    }),
+
+    createScaleSurveyQuestion({
+      questionTitle:
+        'to what extent do you think the behavior was intentional?',
       lowerValue: 0,
       upperValue: 100,
       lowerText: 'Not at all',
@@ -856,7 +879,7 @@ const SURVEY_STAGE1 = createSurveyStage({
 
     createScaleSurveyQuestion({
       questionTitle:
-        'To what extent do you think players did regret their behavior?',
+        'To what extent do you think they regretted their behavior?',
       lowerValue: 0,
       upperValue: 100,
       lowerText: 'Not at all',
@@ -866,17 +889,7 @@ const SURVEY_STAGE1 = createSurveyStage({
 
     createScaleSurveyQuestion({
       questionTitle:
-        'To what extent did you understand that your behavior was affecting the other player??',
-      lowerValue: 0,
-      upperValue: 100,
-      lowerText: 'Not at all',
-      upperText: 'Completely',
-      useSlider: true,
-    }),
-
-    createScaleSurveyQuestion({
-      questionTitle:
-        'To what extent do you think other players were thinking about what you were thinking during the games?',
+        'To what extent did they understand that their behavior was affecting the Vendor?',
       lowerValue: 0,
       upperValue: 100,
       lowerText: 'Not at all',
@@ -887,6 +900,16 @@ const SURVEY_STAGE1 = createSurveyStage({
     createScaleSurveyQuestion({
       questionTitle:
         '### Now, please tell us about your personal experience. \n\n How motivated were you while playing the game?',
+      lowerValue: 0,
+      upperValue: 100,
+      lowerText: 'Not at all',
+      upperText: 'Completely',
+      useSlider: true,
+    }),
+
+    createScaleSurveyQuestion({
+      questionTitle:
+        'To what extent do you think other players were thinking about what you were thinking during the games?',
       lowerValue: 0,
       upperValue: 100,
       lowerText: 'Not at all',
@@ -924,6 +947,7 @@ const SURVEY_STAGE1 = createSurveyStage({
     }),
   ],
 });
+/*
 const SURVEY_STAGE2 = createSurveyStage({
   id: 'lit_survey_2',
   name: 'Questionnaire Part 3/3',
@@ -979,10 +1003,10 @@ const SURVEY_STAGE2 = createSurveyStage({
     }),
   ],
 });
-
+*/
 const SURVEY_STAGE3 = createSurveyStage({
   id: 'lit_survey_3',
-  name: 'Questionnaire Part 2/3',
+  name: 'Questionnaire Part 2/2',
   questions: [
     createScaleSurveyQuestion({
       id: 'alloc_q1',
@@ -1282,7 +1306,7 @@ const PAYOUT_STAGE = createPayoutStage({
     primaryText:
       'Thank you for participating! Below is the breakdown of your earnings based on your performance in each game condition.',
   }),
-  currency: PayoutCurrency.EUR, // Set to your preferred currency (EUR, USD, GBP)
+  currency: PayoutCurrency.GBP, // Set to your preferred currency (EUR, USD, GBP)
   averageAllPayoutItems: false, // Set to true if you want the average instead of the sum
 
   payoutItems: [
@@ -1343,6 +1367,42 @@ const PAYOUT_STAGE = createPayoutStage({
         randomSelectionId: 'allocation_task',
       }),
     ),
+  ],
+});
+
+const POST_SURVEY_STAGE1 = createSurveyStage({
+  id: 'sg_post_survey_1',
+  name: 'Block 1 Reflection',
+  questions: [
+    createTextSurveyQuestion({
+      questionTitle:
+        'Please briefly describe the strategy you used during the block',
+      isOptional: false,
+    }),
+  ],
+});
+
+const POST_SURVEY_STAGE2 = createSurveyStage({
+  id: 'sg_post_survey_2',
+  name: 'Block 2 Reflection',
+  questions: [
+    createTextSurveyQuestion({
+      questionTitle:
+        'Please briefly describe the strategy you used during the block',
+      isOptional: false,
+    }),
+  ],
+});
+
+const POST_SURVEY_STAGE3 = createSurveyStage({
+  id: 'sg_post_survey_3',
+  name: 'Block 3 Reflection',
+  questions: [
+    createTextSurveyQuestion({
+      questionTitle:
+        'Please briefly describe the strategy you used during the block',
+      isOptional: false,
+    }),
   ],
 });
 

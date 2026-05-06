@@ -318,7 +318,7 @@ export class SenderReceiverParticipantView extends MobxLitElement {
       this._inactivityTimer = setTimeout(async () => {
         this._inactivityTimer = null;
         await this.participantService.triggerInactivityCheck();
-      }, 120_000);
+      }, 60_000);
     }
   }
 

@@ -197,7 +197,7 @@ export class SrTutorialOverlay extends MobxLitElement {
           {
             title: 'Your Move',
             content:
-              'Here is where you make the final choice. Click the button to confirm your decision.',
+              'Here is where you make the final choice. Click the button to confirm your choice. Press the "Complete" button of the tutorial box, then choose your market to proceed to the next step.',
             side: 'right',
           },
         ];

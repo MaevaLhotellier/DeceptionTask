@@ -73,6 +73,7 @@ export default (
       new CopyWebpackPlugin({
         patterns: [
           { from: 'assets/sounds', to: 'sounds', noErrorOnMissing: true },
+          { from: 'assets/*.png', to: '[name][ext]', noErrorOnMissing: true },
         ],
       }),
       new HtmlWebpackPlugin({
