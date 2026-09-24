@@ -1,0 +1,238 @@
+@use '../../sass/common';
+@use '../../sass/typescale';
+
+:host {
+  @include common.flex-column;
+  height: calc(100vh - 96px);
+}
+
+.panel-wrapper {
+  @include common.flex-column;
+  align-items: center;
+  flex-grow: 1;
+  overflow: hidden;
+}
+
+.reveal-panel {
+  @include common.flex-column;
+  align-items: center;
+  background: var(--md-sys-color-surface-container);
+  border-bottom: 1px solid var(--md-sys-color-outline);
+  flex-shrink: 0;
+  max-height: 33%;
+  overflow: auto;
+  padding: common.$spacing-large;
+  width: 100%;
+  z-index: 1; /* show over scrolling logs in bottom panel */
+}
+
+.game-panel {
+  @include common.flex-column;
+  height: 100%;
+  overflow: auto;
+}
+
+.status-panel-wrapper {
+  @include common.flex-column;
+  flex-shrink: 0;
+  height: 100%;
+  justify-content: end;
+  padding: common.$spacing-large;
+}
+
+.status-panel {
+  @include common.flex-column;
+  border: 2px solid var(--md-sys-color-outline);
+  border-radius: common.$spacing-medium;
+  flex-grow: 1;
+  gap: 0;
+  overflow: auto;
+}
+
+.subpanel {
+  overflow: auto;
+  padding: common.$main-content-padding;
+}
+
+.log-panel {
+  display: flex;
+  flex-direction: column-reverse;
+  flex-grow: 1;
+  overflow: auto;
+}
+
+.log-scroll-outer-wrapper {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.log-scroll-inner-wrapper {
+  @include common.flex-column;
+  gap: common.$spacing-medium;
+  justify-content: flex-end;
+  padding: common.$main-content-padding;
+}
+
+.status {
+  background: var(--md-sys-color-surface-variant);
+  border-radius: common.$spacing-medium;
+  padding: common.$spacing-medium;
+}
+
+.log-entry {
+  @include common.flex-column;
+  background: var(--md-sys-color-surface-variant);
+  border-radius: common.$spacing-small;
+  padding: common.$spacing-medium;
+
+  &.plain {
+    background: none;
+    color: var(--md-sys-color-secondary);
+    font-style: italic;
+    padding: 0;
+  }
+}
+
+.subtitle {
+  @include typescale.label-small;
+  color: var(--md-sys-color-outline);
+}
+
+.buttons {
+  @include common.flex-row-align-center;
+  flex-wrap: wrap;
+  gap: common.$spacing-medium;
+}
+
+.offer-panel {
+  @include common.flex-column;
+  background-color: var(--md-sys-color-surface-variant);
+  border-bottom: 1px solid var(--md-sys-color-outline-variant);
+  flex-grow: 1;
+  gap: common.$spacing-medium;
+  overflow: auto;
+  padding: common.$main-content-padding;
+}
+
+.offer-description {
+  @include typescale.body-medium;
+  font-weight: bold;
+}
+
+.offer-config {
+  @include common.flex-row-align-center;
+  gap: common.$spacing-medium;
+  padding: common.$spacing-small;
+}
+
+.offer-config-label {
+  @include typescale.body-medium;
+  width: 80px;
+}
+
+select {
+  @include typescale.body-small;
+  background: none;
+  border-radius: common.$spacing-medium;
+  border: 1px solid var(--md-sys-color-outline);
+  color: var(--md-sys-color-on-surface);
+  padding: common.$spacing-small;
+}
+
+.warnings-panel {
+  @include common.flex-column;
+  gap: common.$spacing-small;
+}
+
+.warning {
+  @include typescale.label-small;
+  background: var(--md-sys-color-secondary-container);
+  border-radius: common.$spacing-medium;
+  padding: common.$spacing-small;
+}
+
+.divider {
+  border-bottom: 1px solid var(--md-sys-color-outline-variant);
+}
+
+.round-text {
+  font-style: italic;
+}
+
+.highlight {
+  background-color: var(--md-sys-color-tertiary-container);
+  border-radius: common.$spacing-small;
+}
+
+.number-input {
+  @include common.number-input;
+
+  input {
+    max-width: 50px;
+  }
+}
+
+.positive {
+  color: green;
+}
+
+.negative {
+  color: red;
+}
+
+.input-wrapper {
+  @include common.flex-row-align-center;
+  padding: common.$spacing-medium;
+}
+
+.input {
+  @include common.flex-row-align-center;
+  border: 1px solid var(--md-sys-color-outline);
+  border-radius: common.$spacing-medium;
+  flex-grow: 1;
+  gap: common.$spacing-medium;
+  padding: common.$spacing-medium;
+
+  pr-textarea {
+    flex-grow: 1;
+  }
+}
+
+.chat-message-wrapper {
+  @include common.flex-column;
+  gap: common.$spacing-xs;
+}
+
+pre {
+  @include common.flex-column;
+  border: 1px solid var(--md-sys-color-tertiary);
+  padding: common.$spacing-medium;
+}
+
+code {
+  @include typescale.label-small;
+  color: var(--md-sys-color-tertiary);
+  text-wrap: wrap;
+  word-break: break-all;
+}
+
+.bottom-panel-wrapper {
+  align-items: end;
+  display: grid;
+  flex-grow: 1;
+  grid-template-columns: repeat(2, 1fr);
+  max-width: common.$info-content-max-width;
+  overflow: hidden;
+  width: 100%;
+}
+
+.debug-panel {
+  @include typescale.label-small;
+  @include common.flex-column;
+  gap: common.$spacing-medium;
+  padding: common.$spacing-medium;
+}
+
+.button-wrapper {
+  width: max-content;
+}

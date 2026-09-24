@@ -1,0 +1,25 @@
+@use '../../sass/common.scss';
+@use '../../sass/typescale.scss';
+
+:host {
+  @include common.flex-row;
+}
+
+.progress-bar {
+  @include common.progress-bar;
+  width: 60px;
+
+  &.large {
+    width: 200px;
+  }
+}
+
+@include common.viewport-small {
+  .progress-bar {
+    width: 30px;
+
+    .large {
+      width: 50px;
+    }
+  }
+}

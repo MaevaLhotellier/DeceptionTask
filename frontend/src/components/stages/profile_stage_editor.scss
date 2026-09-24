@@ -1,0 +1,31 @@
+@use '../../sass/common';
+@use '../../sass/typescale';
+
+:host {
+  @include common.flex-column;
+  gap: common.$spacing-large;
+  height: 100%;
+}
+
+.checkbox-wrapper {
+  @include common.flex-row-align-center;
+  gap: common.$spacing-medium;
+}
+
+md-checkbox {
+  flex-shrink: 0;
+}
+
+.profile-options {
+  @include common.flex-column;
+  gap: common.$spacing-medium;
+}
+
+.profile-option {
+  @include common.flex-row-align-center;
+  gap: common.$spacing-small;
+
+  label {
+    cursor: pointer;
+  }
+}

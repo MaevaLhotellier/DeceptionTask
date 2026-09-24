@@ -1,0 +1,283 @@
+@use '../../sass/colors';
+@use '../../sass/common';
+@use '../../sass/typescale';
+
+:host {
+  @include common.flex-row;
+  flex-grow: 1;
+  overflow: auto;
+  width: 100%;
+}
+
+.sidenav {
+  @include common.flex-column;
+  border-right: 1px solid var(--md-sys-color-outline);
+  flex-shrink: 0;
+  width: common.$sidenav-width;
+}
+
+.sidenav-header {
+  @include common.flex-row;
+  align-items: center;
+  background: var(--md-sys-color-surface);
+  border-bottom: 1px solid var(--md-sys-color-outline-variant);
+  flex-shrink: 0;
+  height: common.$header-height;
+  padding: 0 common.$sidenav-padding;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.sidenav-items {
+  @include common.flex-column;
+  flex-shrink: 0;
+  gap: common.$spacing-medium;
+  padding: common.$sidenav-padding;
+}
+
+.panel-wrapper {
+  @include common.flex-row;
+  border-right: 3px solid var(--md-sys-color-outline-variant);
+  flex-shrink: 0;
+  height: 100%;
+  overflow: auto;
+  width: common.$sidenav-width;
+}
+
+.panel-view {
+  @include common.flex-column;
+  color: var(--md-sys-color-on-surface-container);
+  flex-grow: 1;
+  overflow: auto;
+  position: relative;
+  padding-bottom: common.$spacing-xxl;
+
+  .top {
+    @include common.flex-column;
+    gap: common.$spacing-large;
+    padding: common.$sidenav-padding;
+  }
+
+  .bottom {
+    @include common.flex-column;
+    border-top: 1px solid var(--md-sys-color-outline-variant);
+    gap: common.$spacing-large;
+    margin-bottom: 0;
+    margin-top: auto;
+    padding: common.$sidenav-padding;
+    padding-bottom: calc(common.$spacing-xxl * 2);
+  }
+}
+
+.panel-view-header {
+  @include common.flex-row-align-center;
+  @include typescale.label-small;
+  color: var(--md-sys-color-secondary);
+  flex-shrink: 0;
+  flex-wrap: wrap;
+  gap: common.$spacing-small;
+  justify-content: space-between;
+
+  .header-title {
+    font-weight: 500;
+    text-transform: uppercase;
+  }
+}
+
+.sidebar {
+  @include common.flex-column-align-center;
+  border-right: 1px solid var(--md-sys-color-outline-variant);
+  flex-shrink: 0;
+  gap: common.$spacing-medium;
+  padding: common.$sidenav-padding;
+  width: common.$sidenav-closed-width;
+}
+
+.experiment-builder {
+  @include common.flex-column;
+  flex-grow: 1;
+  max-height: calc(100vh - common.$header-height);
+  overflow: auto;
+}
+
+.header {
+  @include common.flex-row-align-center;
+  @include typescale.title-large;
+  background: var(--md-sys-color-surface);
+  border-bottom: 1px solid var(--md-sys-color-outline-variant);
+  flex-shrink: 0;
+  gap: common.$spacing-medium;
+  height: common.$header-height;
+  justify-content: space-between;
+  padding: 0 common.$main-content-padding;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+
+  .left,
+  .right {
+    @include common.flex-row-align-center;
+    gap: common.$spacing-medium;
+  }
+
+  .left {
+    flex-grow: 1;
+  }
+}
+
+.content {
+  @include common.flex-column;
+  flex-grow: 1;
+  gap: common.$spacing-xxl;
+  max-width: common.$info-content-max-width;
+  padding-bottom: calc(common.$main-content-padding * 2);
+
+  &.padding {
+    padding: common.$main-content-padding;
+  }
+}
+
+.chip {
+  @include typescale.label-medium;
+  @include common.chip;
+  padding: common.$spacing-small common.$spacing-medium;
+}
+
+.alpha {
+  @include common.mode-tag;
+}
+
+pr-button pr-icon {
+  margin-right: common.$spacing-medium;
+}
+
+.banner {
+  @include typescale.label-small;
+  @include common.flex-column;
+  gap: common.$spacing-small;
+  padding: common.$spacing-medium;
+
+  &.warning {
+    background: var(--md-sys-color-error-container);
+    color: var(--md-sys-color-on-error-container);
+  }
+
+  p {
+    margin: 0;
+  }
+}
+
+// Agent nav styles
+// TODO: Refactor agent nav into separate component
+.general-item,
+.agent-item {
+  @include common.flex-column;
+  border: 1px solid var(--md-sys-color-outline-variant);
+  border-radius: common.$spacing-medium;
+  cursor: pointer;
+  gap: common.$spacing-small;
+  padding: common.$spacing-medium;
+
+  &:focus,
+  &:hover {
+    background: var(--md-sys-color-surface-variant);
+  }
+
+  &.current,
+  &.current:focus,
+  &.current:hover {
+    background: var(--md-sys-color-secondary-container);
+    color: var(--md-sys-color-on-secondary-container);
+    cursor: initial;
+  }
+}
+
+.subtitle {
+  @include typescale.label-small;
+  color: var(--md-sys-color-outline);
+
+  &.warning {
+    color: var(--md-sys-color-tertiary);
+  }
+}
+
+.title-field {
+  flex-grow: 1;
+}
+
+.checkbox-wrapper {
+  @include common.flex-row-align-center;
+  gap: common.$spacing-small;
+  overflow-wrap: break-word;
+
+  md-checkbox {
+    flex-shrink: 0;
+  }
+}
+
+.inner-wrapper {
+  @include common.flex-column;
+  gap: common.$spacing-xxl;
+  max-width: common.$info-content-max-width;
+  padding: common.$main-content-padding;
+  padding-bottom: calc(common.$main-content-padding * 2);
+}
+
+.alpha-toggle {
+  @include common.flex-row;
+  bottom: 0;
+  justify-content: space-between;
+  margin-top: auto;
+  padding: common.$spacing-medium;
+  width: 100%;
+}
+
+.alpha-toggle .label {
+  color: var(--md-sys-color-on-surface);
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 24px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  background-color: var(--md-sys-color-outline);
+  border-radius: common.$spacing-xxl;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: absolute;
+  transition: 0.3s;
+}
+
+.slider:before {
+  background-color: var(--md-sys-color-surface);
+  border-radius: 50%;
+  bottom: common.$spacing-small;
+  content: '';
+  left: common.$spacing-small;
+  height: common.$spacing-xl;
+  position: absolute;
+  transition: 0.3s;
+  width: common.$spacing-xl;
+}
+
+.switch input:checked + .slider {
+  background-color: var(--md-sys-color-success);
+}
+
+.switch input:checked + .slider:before {
+  transform: translateX(20px);
+}

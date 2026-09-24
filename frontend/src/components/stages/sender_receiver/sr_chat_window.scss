@@ -1,0 +1,56 @@
+@use '../../../sass/common';
+@use '../../../sass/typescale';
+
+:host {
+  display: block;
+  width: 100%;
+}
+
+.chat-info-area {
+  @include common.flex-column;
+  background: var(--md-sys-color-surface);
+  border: 1px solid var(--md-sys-color-outline-variant);
+  border-radius: 20px;
+  padding: common.$spacing-large;
+  gap: common.$spacing-medium;
+  width: 100%;
+  box-sizing: border-box;
+
+  .chat-window-header {
+    @include common.flex-row-align-center;
+    gap: common.$spacing-small;
+
+    md-icon {
+      font-size: 18px;
+      color: var(--md-sys-color-primary);
+    }
+    .chat-title {
+      @include typescale.label-medium;
+      color: var(--md-sys-color-on-surface-variant);
+    }
+  }
+
+  .chat-window-body {
+    @include common.flex-row-align-center;
+    width: 100%;
+
+    .content-text {
+      @include typescale.body-small;
+      color: var(--md-sys-color-on-surface);
+      font-size: 1.25rem; // Increased font size
+    }
+
+    .chat-empty-state {
+      @include common.flex-row-align-center;
+      gap: common.$spacing-small;
+      @include typescale.body-small;
+      font-style: italic;
+      color: var(--md-sys-color-outline);
+
+      md-icon {
+        font-size: 18px;
+        color: var(--md-sys-color-outline);
+      }
+    }
+  }
+}

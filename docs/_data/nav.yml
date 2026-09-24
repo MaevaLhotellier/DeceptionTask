@@ -1,0 +1,39 @@
+- title: Researchers
+  pages:
+  - title: Getting started
+    url: /researchers/getting-started
+  - title: Create an experiment
+    url: /researchers/create-experiment
+  - title: Run an experiment
+    url: /researchers/run-experiment
+  - title: Add LLM mediators to chat
+    url: /researchers/add-mediator
+  - title: Add Prolific integration
+    url: /researchers/prolific
+- title: Developers
+  pages:
+  - title: Running locally
+    url: /developers/run-locally
+  - title: Developing
+    url: /developers/developing
+  - title: Platform design
+    url: /developers/platform-design
+  - title: Agent design
+    url: /developers/agent-design
+  - title: Adding a new stage
+    url: /developers/add-stage
+  - title: Deploying
+    url: /developers/deploy
+  - title: API Reference
+    url: /developers/api
+- title: Feature Docs
+  pages:
+  - title: Variables
+    url: /features/variables
+  - title: Help/alert panel
+    url: /features/help
+- title: Other
+  pages:
+    - title: Changelog
+      url: /changelog
+  

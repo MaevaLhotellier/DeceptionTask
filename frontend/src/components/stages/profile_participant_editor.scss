@@ -1,0 +1,92 @@
+@use "../../sass/common";
+@use "../../sass/typescale";
+
+:host {
+  @include common.flex-column;
+  gap: common.$spacing-xxl;
+  height: 100%;
+  overflow: auto;
+}
+
+.profile-wrapper {
+  @include common.flex-column;
+  flex-grow: 1;
+  gap: common.$spacing-xxl;
+  padding: common.$main-content-padding;
+}
+
+.title {
+  @include typescale.label-small;
+}
+
+.radio-question {
+  @include common.flex-column;
+  gap: common.$spacing-medium;
+}
+
+.radio-button {
+  @include common.flex-row-align-center;
+  gap: common.$spacing-medium;
+  min-height: calc(var(--md-sys-typescale-body-small-line-height) * 1.5);
+}
+
+.avatars-wrapper {
+  @include common.flex-row;
+  flex-wrap: wrap;
+  gap: common.$spacing-xxl;
+  max-width: 500px;
+}
+
+.gendered-avatar-groups {
+  @include common.flex-column;
+  gap: common.$spacing-large;
+}
+
+.gendered-avatar-group {
+  @include common.flex-column;
+  gap: common.$spacing-medium;
+}
+
+.group-label {
+  @include typescale.label-medium;
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.avatar-choice {
+  align-items: center;
+  background: transparent;
+  border: 0px solid transparent;
+  border-radius: common.$spacing-small;
+  cursor: pointer;
+  display: inline-flex;
+  justify-content: center;
+  padding: common.$spacing-small;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.avatar-choice:disabled {
+  cursor: default;
+  opacity: 0.5;
+}
+
+.avatar-choice--selected {
+  border-color: var(--md-sys-color-primary);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--md-sys-color-primary) 35%, transparent);
+}
+
+.avatar-choice:focus-visible {
+  border-color: var(--md-sys-color-primary);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--md-sys-color-primary) 35%, transparent);
+}
+
+.avatar-choice--blue {
+  border-color: var(--md-sys-color-avatar-blue);
+}
+
+.avatar-choice--pink {
+  border-color: var(--md-sys-color-avatar-pink);
+}
+
+.avatar-choice--purple {
+  border-color: var(--md-sys-color-avatar-purple);
+}

@@ -1,0 +1,177 @@
+@use '../../sass/common';
+@use '../../sass/typescale';
+
+:host {
+  @include common.flex-column;
+  gap: common.$spacing-xl;
+  height: 100%;
+  overflow: auto;
+}
+
+.empty-message {
+  color: var(--md-sys-color-outline);
+  font-style: italic;
+}
+
+.questions-preview-wrapper {
+  @include common.flex-column;
+  gap: common.$spacing-large;
+  margin-left: common.$spacing-xxl;
+  padding: common.$spacing-large 0;
+}
+
+.questions-wrapper {
+  @include common.flex-column;
+  flex-grow: 1;
+  gap: calc(common.$spacing-xxl * 2);
+  padding: common.$main-content-padding;
+}
+
+.questions-wrapper-condensed {
+  @include common.flex-column;
+  flex-grow: 1;
+  gap: calc(common.$spacing-small * 2);
+  padding: calc(common.$spacing-small * 2);
+}
+
+.question {
+  @include common.flex-column;
+  gap: common.$spacing-medium;
+}
+
+.slider-wrapper {
+  @include common.flex-row-align-center;
+  gap: common.$spacing-medium;
+}
+
+.radio-question {
+  @include common.flex-column;
+  gap: common.$spacing-medium;
+}
+
+.radio-question-wrapper {
+  @include common.flex-column;
+  gap: common.$spacing-medium;
+
+  &.image {
+    @include common.flex-row;
+    flex-wrap: wrap;
+  }
+}
+
+.image-question {
+  @include common.flex-column;
+  border: 2px solid transparent;
+  border-radius: common.$spacing-medium;
+  cursor: pointer;
+  gap: common.$spacing-large;
+  padding: common.$spacing-medium;
+
+  &.selected {
+    border-color: var(--md-sys-color-secondary);
+    cursor: auto;
+  }
+
+  &.disabled {
+    cursor: auto;
+  }
+
+  &.selected.disabled {
+    border-color: var(--md-sys-color-outline-variant);
+  }
+}
+
+.img-wrapper {
+  @include common.flex-row-align-center;
+  aspect-ratio: 1 / 1;
+  background: var(--md-sys-color-surface);
+  border-radius: common.$spacing-medium;
+  overflow: hidden;
+  width: 200px;
+
+  img {
+    height: auto;
+    width: 100%;
+  }
+}
+
+.radio-button {
+  @include common.flex-row;
+  gap: common.$spacing-large;
+}
+
+.scale {
+  @include common.flex-row;
+  gap: common.$spacing-large;
+  max-width: 500px;
+
+  &.values {
+    justify-content: space-around;
+  }
+
+  &.labels {
+    @include typescale.label-small;
+    justify-content: space-between;
+  }
+
+  &.slider {
+    width: 100%;
+
+    md-slider {
+      width: 100%;
+    }
+  }
+}
+
+.slider-selected-value {
+  @include common.flex-row-align-center;
+  @include typescale.label-medium;
+  color: var(--md-sys-color-primary);
+  font-weight: 500;
+  justify-content: center;
+  margin-top: common.$spacing-small;
+}
+
+.scale-button {
+  @include common.flex-column-align-center;
+  gap: common.$spacing-small;
+}
+
+.scale-option-row {
+  @include common.flex-row;
+  align-items: flex-start;
+  gap: 1.5rem;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+}
+
+.scale-option {
+  @include common.flex-column-align-center;
+  gap: common.$spacing-small;
+  min-width: 4.5rem;
+}
+
+.scale-option + .scale-option {
+  border-left: 0.0625rem solid var(--md-sys-color-outline-variant);
+  padding-left: 1rem;
+  margin-left: 0.5rem;
+}
+
+.scale-option-top,
+.scale-option-bottom {
+  @include typescale.label-medium;
+  text-align: center;
+  line-height: 1.2;
+  max-width: 5.75rem;
+  word-break: normal;
+}
+
+.checkbox-wrapper {
+  @include common.flex-row-align-center;
+  flex-wrap: wrap;
+  gap: common.$spacing-medium;
+}
+
+.required {
+  color: var(--md-sys-color-error);
+}

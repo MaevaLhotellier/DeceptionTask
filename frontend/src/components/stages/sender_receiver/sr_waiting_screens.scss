@@ -1,0 +1,158 @@
+@use '../../../sass/common';
+
+$spacing-sm: common.$spacing-small;
+$spacing-md: common.$spacing-medium;
+$spacing-lg: common.$spacing-large;
+$spacing-xl: common.$spacing-xl;
+$spacing-xxl: common.$spacing-xxl;
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+/* Loading spinner icon */
+.loading-icon {
+  font-size: 48px;
+  color: var(--md-sys-color-primary);
+  animation: spin 1s linear infinite;
+}
+
+/* Waiting icon (gray hourglass) */
+.waiting-icon {
+  font-size: 48px;
+  color: var(--md-sys-color-outline);
+}
+
+.waiting-screen {
+  @include common.flex-column;
+  align-items: left;
+  justify-content: left;
+  height: 100%;
+  padding: 40px;
+  text-align: left;
+
+  p {
+    font-size: 1.1rem;
+    color: var(--md-sys-color-on-surface-variant);
+    margin-bottom: 20px;
+  }
+}
+
+/* Wrapper for icons with margin */
+.icon-wrapper {
+  margin-top: $spacing-xl;
+}
+
+/* Footer with margin */
+.stage-finished-footer {
+  margin-top: $spacing-xxl;
+}
+
+/* Start Game Screen */
+.start-game-screen {
+  .ready-status {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 24px 0;
+    padding: 16px;
+    background: var(--md-sys-color-surface-container);
+    border-radius: 12px;
+    min-width: 240px;
+
+    .status-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 8px;
+      background: var(--md-sys-color-surface);
+      transition: background 0.2s ease;
+
+      md-icon {
+        color: var(--md-sys-color-outline);
+        font-size: 20px;
+      }
+
+      &.ready {
+        background: var(--md-sys-color-primary-container);
+
+        md-icon {
+          color: var(--md-sys-color-primary);
+        }
+      }
+    }
+  }
+
+  .waiting-for-partner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    margin-top: 16px;
+
+    .waiting-icon {
+      animation: pulse 1.5s infinite;
+      color: var(--md-sys-color-primary);
+      font-size: 32px;
+    }
+  }
+
+  md-filled-button {
+    margin-top: 16px;
+  }
+
+  .audio-hint {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--md-sys-color-error);
+    font-size: 0.9rem;
+    margin-bottom: 4px;
+
+    md-icon {
+      font-size: 20px;
+    }
+  }
+}
+
+/* Reading/Instruction panel */
+.reading-panel {
+  max-width: common.$info-content-max-width;
+  margin: 0 auto;
+  padding: $spacing-xxl + $spacing-md;
+  background: var(--md-sys-color-surface);
+  border-radius: $spacing-md;
+  box-shadow: var(--md-sys-color-box-shadow-1, 0 1px 3px rgba(0, 0, 0, 0.1));
+
+  .instruction-box {
+    background: var(--md-sys-color-surface-variant);
+    padding: $spacing-xl;
+    border-left: 4px solid var(--md-sys-color-primary);
+    margin-bottom: $spacing-xxl;
+    line-height: 1.6;
+    border-radius: $spacing-sm;
+    color: var(--md-sys-color-on-surface);
+  }
+
+  .action-footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: $spacing-xxl;
+  }
+}

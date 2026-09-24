@@ -1,0 +1,118 @@
+@use '../../../sass/common';
+
+$spacing-sm: common.$spacing-small;
+$spacing-md: common.$spacing-medium;
+$spacing-lg: common.$spacing-large;
+$spacing-xl: common.$spacing-xl;
+$spacing-xxl: common.$spacing-xxl;
+
+@keyframes tutorial-pulse {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 3px rgba(25, 118, 210, 0.9),
+      0 0 10px rgba(25, 118, 210, 0.4);
+  }
+  50% {
+    box-shadow:
+      0 0 0 5px rgba(25, 118, 210, 0.5),
+      0 0 20px rgba(25, 118, 210, 0.2);
+  }
+}
+
+.tutorial-highlight {
+  position: relative;
+  border-radius: $spacing-md;
+  transition:
+    background-color 0.3s ease,
+    box-shadow 0.3s ease;
+
+  &.active {
+    background-color: rgba(25, 118, 210, 0.15);
+    box-shadow:
+      0 0 0 3px rgba(25, 118, 210, 0.9),
+      0 0 10px rgba(25, 118, 210, 0.4);
+    z-index: 1;
+    animation: tutorial-pulse 1.4s ease-in-out infinite;
+  }
+}
+.feedback-panel {
+  max-width: common.$info-content-max-width;
+  margin: 0 auto;
+  padding: $spacing-xxl * 2;
+  background: var(--md-sys-color-surface);
+  border-radius: $spacing-md;
+  box-shadow: var(--md-sys-color-box-shadow-1, 0 1px 3px rgba(0, 0, 0, 0.1));
+  text-align: center;
+
+  h3 {
+    color: var(--md-sys-color-primary);
+    margin-bottom: $spacing-xxl;
+  }
+
+  p {
+    font-size: 1.2rem;
+    margin: $spacing-lg 0;
+  }
+
+  .waiting-text {
+    margin-top: $spacing-xxl + $spacing-md;
+    font-style: italic;
+    color: var(--md-sys-color-on-surface-variant);
+  }
+}
+
+/* Result details container */
+.result-details {
+  display: flex;
+  justify-content: center;
+  gap: $spacing-xxl + $spacing-md;
+  margin: $spacing-xl 0;
+
+  .score-card {
+    text-align: center;
+    padding: $spacing-xl $spacing-xxl;
+    background: var(--md-sys-color-surface-container);
+    border-radius: $spacing-md;
+    min-width: 100px;
+
+    .label {
+      font-size: 0.9rem;
+      color: var(--md-sys-color-on-surface-variant);
+      margin-bottom: $spacing-md;
+    }
+
+    .score {
+      font-size: 1.5rem;
+      color: var(--md-sys-color-primary);
+    }
+  }
+}
+
+/* Cumulative payoff display */
+.cumulative-payoff {
+  display: inline-block;
+  margin: $spacing-xl auto 0;
+  padding: $spacing-lg $spacing-xxl;
+  background: var(--md-sys-color-secondary-container);
+  border-radius: $spacing-md;
+  text-align: center;
+  font-size: 1.1em;
+  color: var(--md-sys-color-on-secondary-container);
+
+  b {
+    color: var(--md-sys-color-secondary);
+    font-size: 1.2em;
+  }
+}
+
+/* Waiting text for next round */
+.waiting-next-text {
+  margin-top: $spacing-xl;
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+/* Next round button wrapper */
+.next-round-wrapper {
+  margin-top: $spacing-xl;
+}

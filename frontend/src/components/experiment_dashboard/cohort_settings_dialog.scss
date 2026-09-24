@@ -1,0 +1,121 @@
+@use '../../sass/colors';
+@use '../../sass/common';
+@use '../../sass/typescale';
+
+:host {
+  @include common.overlay;
+}
+
+.dialog {
+  @include common.dialog;
+  height: 600px;
+  width: 800px;
+}
+
+.selections {
+  @include common.flex-row;
+  gap: common.$spacing-medium;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.model-selector {
+  @include common.flex-row;
+  gap: common.$spacing-medium;
+}
+
+.header {
+  @include typescale.title-medium;
+  @include common.flex-row-align-center;
+  border-bottom: 1px solid var(--md-sys-color-outline-variant);
+  flex-shrink: 0;
+  gap: common.$spacing-medium;
+  height: common.$header-height;
+  justify-content: space-between;
+  padding: 0 common.$main-content-padding;
+}
+
+.body {
+  @include common.flex-column;
+  flex-grow: 1;
+  gap: common.$spacing-xxl;
+  overflow: auto;
+  padding: common.$main-content-padding;
+}
+
+.footer {
+  @include typescale.title-medium;
+  @include common.flex-row-align-center;
+  border-top: 1px solid var(--md-sys-color-outline-variant);
+  flex-shrink: 0;
+  gap: common.$spacing-medium;
+  height: common.$header-height;
+  justify-content: space-between;
+  padding: 0 common.$main-content-padding;
+}
+
+.config-item {
+  @include common.flex-column;
+  gap: common.$spacing-small;
+}
+
+.number-input {
+  @include common.number-input;
+  /* width of checkbox plus gap */
+  margin-left: calc(48px + common.$spacing-medium);
+  width: max-content;
+}
+
+.checkbox-wrapper {
+  @include common.flex-row-align-center;
+  gap: common.$spacing-small;
+  overflow-wrap: break-word;
+
+  md-checkbox {
+    flex-shrink: 0;
+  }
+}
+
+/* Used in agent-participant-configuration-dialog */
+.buttons-wrapper {
+  @include common.flex-row-align-center;
+  justify-content: end;
+}
+
+/* Used in agent-participant-configuration-dialog */
+.agent-persona-wrapper {
+  @include common.flex-row;
+  flex-wrap: wrap;
+  gap: common.$spacing-large;
+  margin-top: common.$spacing-large;
+}
+
+.agent-persona {
+  @include common.flex-column;
+  border: 1px solid var(--md-sys-color-outline-variant);
+  border-radius: common.$spacing-small;
+  flex-wrap: wrap;
+  gap: common.$spacing-small;
+  max-width: 400px;
+  padding: common.$spacing-medium;
+
+  &:focus,
+  &:hover {
+    cursor: pointer;
+  }
+
+  &.selected {
+    background: var(--md-sys-color-surface-variant);
+    border-color: var(--md-sys-color-primary);
+  }
+}
+
+.subtitle {
+  @include typescale.label-small;
+  color: var(--md-sys-color-outline);
+}
+
+.error {
+  @include typescale.body-small;
+  color: var(--md-sys-color-error);
+}

@@ -1,0 +1,58 @@
+@use "../../sass/common";
+@use "../../sass/typescale";
+
+:host {
+  @include common.flex-column;
+  gap: common.$spacing-large;
+  height: 100%;
+}
+
+.section {
+  @include common.flex-column;
+  gap: common.$spacing-medium;
+}
+
+.title {
+  @include typescale.title-small;
+}
+
+.checkbox-wrapper {
+  @include common.flex-row-align-center;
+  gap: common.$spacing-medium;
+}
+
+md-checkbox {
+  flex-shrink: 0;
+}
+
+.ranking-items {
+  @include common.flex-column;
+  gap: common.$spacing-medium;
+}
+
+.ranking-item {
+  @include common.flex-row-align-center;
+  justify-content: space-between;
+  padding: common.$spacing-medium;
+  background-color: var(--md-sys-color-surface-variant);
+  border-radius: common.$spacing-medium;
+
+  pr-textarea {
+    flex-grow: 1;
+  }
+}
+
+pr-icon-button {
+  margin-left: common.$spacing-small;
+}
+
+.indented {
+  /* width of checkbox plus gap */
+  margin-left: calc(48px + common.$spacing-medium);
+}
+
+.warning{
+  font-style: italic;
+  color: var(--md-sys-color-error);
+  max-width: common.$info-content-max-width;
+}

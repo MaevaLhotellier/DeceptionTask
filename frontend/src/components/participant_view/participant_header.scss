@@ -1,0 +1,53 @@
+@use '../../sass/colors';
+@use '../../sass/common';
+@use '../../sass/typescale';
+
+:host {
+  @include common.flex-column;
+}
+
+.header {
+  @include common.flex-row-align-center;
+  @include typescale.title-large;
+  border-bottom: 1px solid var(--md-sys-color-outline-variant);
+  flex-shrink: 0;
+  height: common.$header-height;
+  gap: common.$spacing-small;
+  justify-content: space-between;
+  padding: 0 common.$main-content-padding;
+  position: sticky;
+  top: 0;
+}
+
+.left,
+.right {
+  @include common.flex-row-align-center;
+  gap: common.$spacing-small;
+}
+
+pr-icon {
+  cursor: default;
+}
+
+participant-profile-display {
+  @include common.flex-row-align-center;
+  @include typescale.title-medium;
+  border: 2px solid var(--md-sys-color-outline-variant);
+  border-radius: common.$spacing-medium;
+  height: calc(common.$header-height - common.$spacing-large);
+  padding: 0 common.$spacing-medium;
+}
+
+.timer {
+  @include common.flex-row-align-center;
+  @include typescale.label-large;
+  gap: common.$spacing-xs;
+  color: var(--md-sys-color-on-surface-variant);
+  margin-left: common.$spacing-medium;
+}
+
+@include common.viewport-small {
+  .menu-button {
+    display: none;
+  }
+}

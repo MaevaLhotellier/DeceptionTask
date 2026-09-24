@@ -1,0 +1,116 @@
+@use '../../sass/colors';
+@use '../../sass/common';
+@use '../../sass/typescale';
+
+:host {
+  @include common.overlay;
+}
+
+.dialog {
+  @include common.dialog;
+  height: 820px;
+  width: 1080px;
+
+  &.full {
+    height: 100%;
+    width: common.$info-content-max-width;
+  }
+}
+
+.header {
+  @include typescale.title-medium;
+  @include common.flex-row-align-center;
+  border-bottom: 1px solid var(--md-sys-color-outline-variant);
+  flex-shrink: 0;
+  gap: common.$spacing-medium;
+  height: common.$header-height;
+  justify-content: space-between;
+  padding: 0 common.$main-content-padding;
+}
+
+.banner {
+  background: var(--md-sys-color-outline-variant);
+  border-radius: common.$spacing-medium;
+  padding: common.$spacing-medium;
+
+  &.error {
+    background: var(--md-sys-color-error-container);
+    color: var(--md-sys-color-on-error-container);
+  }
+}
+
+.tabs {
+  @include common.flex-row;
+  align-self: stretch;
+}
+
+.tab {
+  @include common.flex-row-align-center;
+  border-bottom: 3px solid transparent;
+  cursor: pointer;
+  padding: 0 common.$spacing-large;
+  user-select: none;
+
+  &.selected {
+    border-color: var(--md-sys-color-primary);
+    color: var(--md-sys-color-primary);
+    cursor: initial;
+  }
+}
+
+.body {
+  @include common.flex-column;
+  flex-grow: 1;
+  overflow: auto;
+  gap: common.$spacing-xxl;
+  padding: common.$main-content-padding;
+}
+
+.card-gallery-wrapper {
+  @include common.flex-row;
+  flex-wrap: wrap;
+  gap: common.$spacing-large;
+}
+
+.card {
+  @include common.flex-column;
+  border: 1px solid var(--md-sys-color-outline);
+  border-radius: common.$spacing-medium;
+  cursor: pointer;
+  gap: common.$spacing-medium;
+  padding: common.$spacing-large;
+  width: 240px;
+  word-break: word-break;
+
+  &:focus,
+  &:hover {
+    background: var(--md-sys-color-surface-variant);
+  }
+
+  &.disabled {
+    pointer-events: none;
+    background-color: var(--md-sys-color-surface);
+    opacity: 0.5;
+    cursor: default;
+  }
+
+  .title {
+    @include typescale.title-small;
+  }
+}
+
+.template-controls {
+  @include common.flex-column;
+  gap: common.$spacing-small;
+}
+
+.gallery-section {
+  @include common.flex-column;
+  gap: common.$spacing-medium;
+}
+
+.gallery-title {
+  @include typescale.label-small;
+  color: var(--md-sys-color-outline);
+  text-transform: uppercase;
+}

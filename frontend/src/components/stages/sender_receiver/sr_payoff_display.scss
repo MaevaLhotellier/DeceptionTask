@@ -1,0 +1,97 @@
+@use '../../../sass/common';
+
+$spacing-sm: common.$spacing-small;
+$spacing-md: common.$spacing-medium;
+$spacing-lg: common.$spacing-large;
+$spacing-xl: common.$spacing-xl;
+$spacing-xxl: common.$spacing-xxl;
+
+/* Unified Payoff Table Styles */
+.payoff-details-container {
+  @include common.flex-column;
+  gap: $spacing-md;
+  font-size: 0.9rem;
+  width: 100%;
+}
+
+.state-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: $spacing-sm;
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.payoff-row {
+  @include common.flex-column;
+  padding: $spacing-lg;
+  border-radius: $spacing-md;
+  background-color: var(--md-sys-color-surface-container-low);
+  border: none;
+  color: var(--md-sys-color-on-surface);
+
+  &.highlight-row {
+    background-color: var(--md-sys-color-primary-container);
+    border: 2px solid var(--md-sys-color-primary);
+    color: var(--md-sys-color-on-primary-container);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+
+    .role-payoff b {
+      font-weight: 700;
+      font-size: 1.1em;
+      color: var(--md-sys-color-primary);
+    }
+  }
+
+  &.dimmed-row {
+    background-color: var(--md-sys-color-surface-variant);
+    color: var(--md-sys-color-on-surface-variant);
+    border-color: transparent;
+  }
+
+  .role-payoff {
+    @include common.flex-row;
+    justify-content: space-between;
+    padding: 2px $spacing-md;
+  }
+}
+
+/* Decision Card */
+.decision-card,
+.info-card {
+  flex: 1;
+  border: 1px solid var(--md-sys-color-outline-variant);
+  border-radius: $spacing-lg;
+  padding: $spacing-xl;
+  background-color: var(--md-sys-color-surface);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+
+  h4 {
+    margin: 0 0 $spacing-lg 0;
+    font-size: 1.2rem;
+    color: var(--md-sys-color-on-surface);
+    font-weight: 600;
+    border-bottom: none;
+    padding-bottom: $spacing-sm;
+    text-align: center;
+    margin-bottom: $spacing-lg;
+  }
+}
+
+.decision-card {
+  .card-header {
+    text-align: center;
+    margin-bottom: $spacing-xl;
+  }
+}
+
+/* Payoff info card content */
+.payoff-info-content {
+  text-align: left;
+  margin-top: $spacing-lg;
+}

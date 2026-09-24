@@ -1,0 +1,19 @@
+@use "../../sass/common";
+@use "../../sass/typescale";
+
+:host {
+  @include common.flex-column;
+  gap: common.$spacing-xl;
+  height: 100%;
+}
+
+.overlay {
+  @include common.overlay;
+  opacity: 0;
+}
+
+.transfer-wrapper {
+  @include common.flex-column;
+  gap: common.$spacing-medium;
+  padding: common.$main-content-padding;
+}

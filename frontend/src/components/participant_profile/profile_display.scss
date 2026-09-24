@@ -1,0 +1,49 @@
+@use '../../sass/common';
+@use '../../sass/typescale';
+
+:host {
+  @include common.flex-column;
+  height: min-content;
+  width: min-content;
+}
+
+profile-display {
+  @include common.flex-column;
+  height: min-content;
+  width: min-content;
+}
+
+.horizontal-profile {
+  @include common.flex-row-align-center;
+  flex-wrap: wrap;
+  gap: common.$spacing-large;
+  width: max-content;
+
+  &.small {
+    gap: common.$spacing-small;
+  }
+}
+
+.waiting-profile {
+  @include typescale.body-small;
+  @include common.flex-column-align-center;
+  flex-wrap: wrap;
+  gap: common.$spacing-medium;
+  overflow-wrap: break-word;
+  text-align: center;
+  width: 100px;
+}
+
+.display-name-wrapper {
+  @include common.flex-row-align-center;
+  gap: common.$spacing-small;
+}
+
+.display-name {
+  &.truncated {
+    max-width: 150px; // Approximate width for 20ish characters
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}

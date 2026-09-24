@@ -1,0 +1,33 @@
+@use "../../sass/common";
+@use "../../sass/typescale";
+
+:host {
+  @include common.flex-column;
+  gap: common.$spacing-large;
+  height: 100%;
+  overflow: auto;
+  width: 100%;
+}
+
+.info-block {
+  @include common.flex-column;
+  gap: common.$spacing-large;
+  max-width: common.$info-content-max-width;
+}
+
+.html-wrapper {
+  @include common.flex-column;
+  @include typescale.body-medium;
+  @include common.html-preview;
+  flex-grow: 1;
+  gap: common.$spacing-xl;
+  margin-bottom: common.$spacing-xl;
+  padding: common.$main-content-padding;
+}
+
+.html-wrapper img {
+  height: 100%;
+  max-width: 100%;
+  display: block;
+  margin: auto;
+}

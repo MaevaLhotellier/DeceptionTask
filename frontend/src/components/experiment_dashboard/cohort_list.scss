@@ -1,0 +1,91 @@
+@use '../../sass/colors';
+@use '../../sass/common';
+@use '../../sass/typescale';
+
+:host {
+  @include common.flex-column;
+  flex-grow: 1;
+  overflow: auto;
+}
+
+.experiment-manager {
+  @include common.flex-column;
+  flex-grow: 1;
+  overflow: auto;
+}
+
+.checkbox-wrapper {
+  @include typescale.body-small;
+  @include common.flex-row-align-center;
+  color: var(--md-sys-color-outline);
+  cursor: pointer;
+  gap: common.$spacing-xs;
+  overflow-wrap: break-word;
+
+  &:focus,
+  &:hover {
+    color: var(--md-sys-color-secondary);
+  }
+}
+
+.header {
+  @include common.flex-row-align-center;
+  @include typescale.title-medium;
+  border-bottom: 2px solid var(--md-sys-color-outline-variant);
+  flex-shrink: 0;
+  gap: common.$spacing-medium;
+  height: common.$header-height;
+  justify-content: space-between;
+  padding: 0 common.$main-content-padding;
+  position: relative;
+  z-index: 10;
+
+  .left,
+  .right {
+    @include common.flex-row-align-center;
+    gap: common.$spacing-medium;
+  }
+}
+
+small {
+  @include typescale.title-small;
+  color: var(--md-sys-color-outline);
+}
+
+.content {
+  @include common.flex-column;
+  flex-grow: 1;
+  overflow: auto;
+}
+
+.empty-message {
+  @include common.flex-column;
+  color: var(--md-sys-color-outline);
+  gap: common.$spacing-medium;
+  padding: common.$main-content-padding;
+}
+
+.menu-wrapper {
+  @include typescale.label-medium;
+  @include common.flex-column;
+  gap: common.$spacing-medium;
+  overflow: auto;
+}
+
+.menu-item {
+  @include common.nav-item;
+  @include common.flex-column;
+  align-items: start;
+  border-radius: common.$spacing-medium;
+  gap: common.$spacing-small;
+  padding: common.$spacing-medium;
+}
+
+.sort-controls {
+  transform: scale(0.8);
+  transform-origin: right center;
+
+  pr-menu {
+    --pr-menu-icon-color: var(--md-sys-color-on-surface-variant);
+  }
+}

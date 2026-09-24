@@ -1,0 +1,54 @@
+@use "../../sass/common";
+@use "../../sass/typescale";
+
+:host {
+  @include common.flex-column;
+  @include common.html-preview;
+  height: 100%;
+  overflow: auto;
+}
+
+.html-wrapper {
+  @include common.flex-column;
+  @include typescale.body-medium;
+  
+  gap: common.$spacing-xl;
+  padding: common.$main-content-padding;
+}
+
+.tos-block {
+  @include common.flex-column;
+  gap: common.$spacing-large;
+  max-width: common.$info-content-max-width;
+}
+
+.ack-wrapper {
+  @include common.flex-column;
+  background: var(--md-sys-color-surface);
+  bottom: common.$footer-height;
+  flex-shrink: 0;
+  margin-bottom: 0;
+  margin-top: auto;
+  position: sticky;
+}
+
+.checkbox-wrapper {
+  @include common.flex-row-align-center;
+  flex-wrap: wrap;
+  gap: common.$spacing-medium;
+}
+
+.timestamp-wrapper {
+  @include common.flex-column;
+  gap: common.$spacing-small;
+}
+
+.ack {
+  @include typescale.label-small;
+  color: var(--md-sys-color-primary);
+  font-style: italic;
+}
+
+.divider {
+  border-bottom: 1px solid var(--md-sys-color-outline-variant);
+}

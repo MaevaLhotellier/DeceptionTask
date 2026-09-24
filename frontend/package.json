@@ -1,0 +1,86 @@
+{
+  "name": "deliberate-lab",
+  "author": "Google PAIR",
+  "version": "1.0.0",
+  "license": "Apache-2.0",
+  "website": "https://github.com/PAIR-code/deliberate-lab",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PAIR-code/deliberate-lab.git"
+  },
+  "private": true,
+  "scripts": {
+    "build": "NODE_OPTIONS='--loader ts-node/esm' webpack --mode development",
+    "build:prod": "NODE_OPTIONS='--loader ts-node/esm' webpack --mode production",
+    "serve": "NODE_OPTIONS='--loader ts-node/esm' webpack serve  --mode development",
+    "serve:prod": "NODE_OPTIONS='--loader ts-node/esm' webpack serve --mode production",
+    "start": "npm run build && npm run serve",
+    "start:prod": "npm run build:prod && npm run serve:prod",
+    "lint": "eslint src",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.28.5",
+    "@babel/preset-typescript": "^7.28.5",
+    "@swc/register": "^0.1.10",
+    "@types/gtag.js": "^0.0.20",
+    "@types/jest": "^30.0.0",
+    "@types/sanitize-html": "^2.16.0",
+    "@typescript-eslint/eslint-plugin": "^8.49.0",
+    "babel-jest": "^30.2.0",
+    "clean-webpack-plugin": "^4.0.0",
+    "copy-webpack-plugin": "^13.0.1",
+    "eslint": "^9.39.1",
+    "git-revision-webpack-plugin": "^5.0.0",
+    "html-webpack-plugin": "^5.6.5",
+    "jest": "^30.2.0",
+    "process": "^0.11.10",
+    "sass": "^1.96.0",
+    "sass-loader": "^16.0.6",
+    "ts-jest": "^29.4.6",
+    "ts-lit-plugin": "^2.0.2",
+    "ts-loader": "^9.5.4",
+    "typescript": "^5.9.3",
+    "webpack": "^5.103.0",
+    "webpack-cli": "^6.0.1",
+    "webpack-dev-server": "^5.2.2"
+  },
+  "dependencies": {
+    "@adobe/lit-mobx": "^2.2.2",
+    "@deliberation-lab/utils": "file:../utils",
+    "@google/generative-ai": "^0.24.1",
+    "@material/mwc-icon": "^0.27.0",
+    "@material/web": "^2.4.1",
+    "@types/router5": "^5.0.0",
+    "buffer": "^6.0.3",
+    "crypto-browserify": "^3.12.1",
+    "css-loader": "^7.1.2",
+    "csv": "^6.4.1",
+    "emoji-picker-element": "^1.28.0",
+    "firebase": "^12.6.0",
+    "jszip": "^3.10.1",
+    "lit": "^3.3.1",
+    "lit-element": "^4.2.1",
+    "micromark": "^4.0.2",
+    "micromark-extension-gfm": "^3.0.0",
+    "mobx": "^6.15.0",
+    "router5": "^8.0.1",
+    "router5-plugin-browser": "^8.0.1",
+    "sanitize-html": "^2.17.0",
+    "stream-browserify": "^3.0.0",
+    "style-loader": "^4.0.0",
+    "tslib": "^2.8.1",
+    "vm-browserify": "^1.1.2"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node",
+    "transform": {
+      "^.+\\.[t|j]sx?$": "babel-jest"
+    },
+    "transformIgnorePatterns": [
+      "node_modules/?!micromark"
+    ],
+    "testTimeout": 15000
+  }
+}

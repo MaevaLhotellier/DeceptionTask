@@ -1,0 +1,82 @@
+@use '../../sass/common';
+@use '../../sass/typescale';
+
+:host {
+  @include common.flex-column;
+  gap: common.$spacing-large;
+}
+
+h2 {
+  @include typescale.title-medium;
+  margin: 0;
+}
+
+.title {
+  @include typescale.title-small;
+}
+
+p {
+  margin: 0;
+}
+
+.tables-wrapper {
+  @include common.flex-row;
+  flex-wrap: wrap;
+  gap: common.$spacing-large;
+}
+
+.table {
+  @include common.table;
+  border-color: var(--md-sys-color-outline-variant);
+  border-radius: common.$spacing-small;
+
+  .table-cell {
+    word-break: break-word;
+  }
+
+  .table-head {
+    display: flex;
+    flex-grow: 1;
+  }
+}
+
+.description {
+  font-style: italic;
+}
+
+.divider {
+  border-bottom: 1px solid var(--md-sys-color-outline-variant);
+}
+
+.positive {
+  color: green;
+}
+
+.negative {
+  color: red;
+}
+
+.highlight {
+  color: var(--md-sys-color-tertiary);
+}
+
+.participant-cell {
+  @include common.flex-column;
+  min-width: 180px;
+}
+
+.value-header {
+  min-width: 150px;
+}
+
+.indicator {
+  margin-right: 4px;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.subtitle {
+  @include typescale.label-small;
+}

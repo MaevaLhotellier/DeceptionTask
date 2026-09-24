@@ -1,0 +1,332 @@
+@use '../../../sass/common';
+
+$spacing-sm: common.$spacing-small;
+$spacing-md: common.$spacing-medium;
+$spacing-lg: common.$spacing-large;
+$spacing-xl: common.$spacing-xl;
+$spacing-xxl: common.$spacing-xxl;
+
+// --- Tutorial Highlight ---
+
+@keyframes tutorial-pulse {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 3px #1565c0,
+      0 0 16px 3px rgba(21, 101, 192, 0.7);
+    background-color: rgba(21, 101, 192, 0.2);
+  }
+  50% {
+    box-shadow:
+      0 0 0 6px rgba(21, 101, 192, 0.4),
+      0 0 28px 6px rgba(21, 101, 192, 0.35);
+    background-color: rgba(21, 101, 192, 0.08);
+  }
+}
+
+.tutorial-highlight {
+  position: relative;
+  border-radius: $spacing-md;
+
+  &.active {
+    background-color: rgba(21, 101, 192, 0.2);
+    z-index: 1;
+    animation: tutorial-pulse 1s ease-in-out infinite;
+  }
+}
+.interact-disabled {
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
+// --- Shared Panel Containers ---
+
+.action-panel,
+.waiting-panel {
+  max-width: common.$info-content-max-width;
+  margin: 0 auto;
+  padding: $spacing-xxl + $spacing-md;
+  background: var(--md-sys-color-surface);
+  border-radius: $spacing-md;
+  box-shadow: var(--md-sys-color-box-shadow-1, 0 1px 3px rgba(0, 0, 0, 0.1));
+}
+
+.waiting-panel {
+  text-align: center;
+
+  p {
+    font-size: 1.1rem;
+    color: var(--md-sys-color-on-surface-variant);
+    margin-bottom: 20px;
+  }
+}
+
+// --- Countdown ---
+
+%countdown-base {
+  @include common.flex-row-align-center;
+  justify-content: center;
+  gap: $spacing-md;
+  margin: $spacing-lg auto;
+  border-radius: $spacing-md;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+.countdown-display {
+  @extend %countdown-base;
+  padding: $spacing-lg $spacing-xxl;
+  background-color: var(--md-sys-color-primary-container);
+  border: none;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--md-sys-color-primary);
+
+  md-icon {
+    font-size: 1.5rem;
+  }
+
+  &.urgent {
+    background-color: var(--md-sys-color-error-container);
+    border-color: var(--md-sys-color-error);
+    color: var(--md-sys-color-error);
+    animation: pulse 1s infinite;
+  }
+}
+
+.partner-countdown-display {
+  @extend %countdown-base;
+  padding: $spacing-md $spacing-xl;
+  background-color: var(--md-sys-color-surface-container);
+  border: none;
+  border-radius: $spacing-md;
+  font-size: 1rem;
+  color: var(--md-sys-color-on-surface-variant);
+
+  md-icon {
+    font-size: 1.2rem;
+    color: var(--md-sys-color-outline);
+  }
+}
+
+// --- Text Helpers ---
+
+.round-context-text {
+  text-align: center;
+  color: var(--md-sys-color-on-surface-variant);
+  margin-bottom: $spacing-xl;
+  line-height: 1.5;
+}
+
+.action-instruction {
+  text-align: center;
+  color: var(--md-sys-color-primary);
+  font-weight: 600;
+  margin-top: $spacing-xl;
+  font-size: 1.1em;
+}
+
+// --- Confirm Button ---
+
+.confirm-button-wrapper {
+  margin-top: $spacing-xxl + $spacing-md;
+  display: flex;
+  justify-content: center;
+}
+
+.primary-action-btn {
+  --md-filled-button-container-color: var(--md-sys-color-primary);
+  --md-filled-button-container-height: 40px;
+  --md-filled-button-container-shape: 9999px;
+  font-size: 1.1em;
+  padding: 0 $spacing-xxl;
+}
+
+// --- Status Reveal ---
+
+.status-reveal {
+  color: var(--md-sys-color-on-tertiary-container);
+  border-radius: $spacing-sm;
+  border: 1px solid var(--md-sys-color-outline-variant);
+  padding: $spacing-md $spacing-xl;
+  margin: $spacing-md auto;
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+// --- Shared Card + Button Rows ---
+
+.cards-row {
+  display: flex !important;
+  gap: $spacing-xl;
+  width: 100%;
+  align-items: stretch;
+
+  .sender-card-column,
+  .receiver-card-column {
+    flex: 1;
+    min-width: 0; // 防止 flex 子项溢出
+    flex-direction: column;
+    border: none;
+    background: transparent;
+
+    sr-decision-card,
+    sr-payoff-info-card {
+      flex: 1;
+      display: block;
+      min-height: 0;
+    }
+  }
+}
+.buttons-row {
+  display: flex;
+  gap: $spacing-xl;
+  width: 100%;
+  margin-top: $spacing-xl;
+
+  .button-wrapper {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+
+    .signal-btn {
+      width: 100%;
+      --md-filled-button-container-height: 40px;
+      --md-filled-button-container-shape: 9999px;
+      --md-outlined-button-container-height: 40px;
+      --md-outlined-button-container-shape: 9999px;
+      --md-outlined-button-outline-color: var(--md-sys-color-outline-variant);
+      --md-outlined-button-outline-width: 1px;
+    }
+  }
+}
+
+// --- Probability Slider ---
+
+.probability-slider {
+  margin: $spacing-xxl 0;
+
+  .slider-above {
+    position: relative;
+    height: 32px;
+  }
+
+  .slider-indicator {
+    position: absolute;
+    bottom: 0;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .indicator-label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--md-sys-color-on-surface);
+      margin-bottom: 4px;
+    }
+
+    .indicator-arrow {
+      width: 0;
+      height: 0;
+      border-left: 8px solid transparent;
+      border-right: 8px solid transparent;
+      border-top: 16px solid var(--md-sys-color-on-surface);
+    }
+  }
+
+  .slider-track {
+    height: 4px;
+    background: linear-gradient(
+      to right,
+      var(--md-sys-color-primary),
+      var(--md-sys-color-tertiary)
+    );
+    border-radius: 2px;
+  }
+
+  .slider-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-top: $spacing-lg;
+    font-size: 0.85rem;
+    color: var(--md-sys-color-on-surface-variant);
+  }
+}
+
+// --- Chat Window Footer ---
+
+.chat-window-footer {
+  @include common.flex-row-align-center;
+  background: var(--md-sys-color-surface);
+  border: 1px solid var(--md-sys-color-outline-variant);
+  border-radius: 50px;
+  padding: $spacing-lg $spacing-xl $spacing-lg $spacing-xxl;
+  width: 100%;
+  margin-top: $spacing-xl;
+  box-sizing: border-box;
+
+  pr-textarea {
+    flex-grow: 1;
+  }
+}
+
+// --- Payoff Details ---
+
+.payoff-details-container {
+  @include common.flex-column;
+  gap: $spacing-md;
+  font-size: 0.9rem;
+  width: 100%;
+}
+
+.payoff-row {
+  @include common.flex-column;
+  padding: $spacing-lg;
+  border-radius: $spacing-md;
+  background-color: var(--md-sys-color-surface-container-low);
+  border: none;
+  color: var(--md-sys-color-on-surface);
+
+  &.highlight-row {
+    background-color: var(--md-sys-color-primary-container);
+    border: 2px solid var(--md-sys-color-primary);
+    color: var(--md-sys-color-on-primary-container);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+
+    .role-payoff b {
+      font-weight: 700;
+      font-size: 1.1em;
+      color: var(--md-sys-color-primary);
+    }
+  }
+
+  &.dimmed-row {
+    background-color: var(--md-sys-color-surface-variant);
+    color: var(--md-sys-color-on-surface-variant);
+    border-color: transparent;
+  }
+
+  .role-payoff {
+    @include common.flex-row;
+    justify-content: space-between;
+    padding: 2px $spacing-md;
+  }
+}
+.standalone-input-container {
+  margin-top: $spacing-xl;
+  width: 100%;
+  border: 1px solid var(--md-sys-color-outline-variant);
+  border-radius: $spacing-md;
+  padding: $spacing-sm $spacing-md;
+  box-sizing: border-box;
+}

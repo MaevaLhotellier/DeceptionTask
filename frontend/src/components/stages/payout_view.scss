@@ -1,0 +1,75 @@
+@use "../../sass/common";
+@use "../../sass/typescale";
+
+:host {
+  @include common.flex-column;
+  gap: common.$spacing-xl;
+  height: 100%;
+  overflow: auto;
+}
+
+h2 {
+  @include typescale.title-medium;
+  margin: 0;
+}
+
+h3 {
+  @include typescale.title-small;
+  margin: 0;
+}
+
+.total {
+  @include common.flex-row-align-center;
+  @include typescale.body-large;
+  gap: common.$spacing-medium;
+}
+
+.stages-wrapper {
+  @include common.flex-column;
+  gap: common.$spacing-xl;
+  padding: common.$main-content-padding;
+}
+
+.scoring-bundle {
+  @include common.flex-column;
+  background: var(--md-sys-color-surface-variant);
+  border-radius: common.$spacing-medium;
+  gap: common.$spacing-xxl;
+  padding: common.$spacing-large;
+}
+
+.scoring-item {
+  @include common.flex-column;
+  border-left: 2px solid var(--md-sys-color-secondary);
+  gap: common.$spacing-medium;
+  padding: 0 common.$spacing-large;
+}
+
+.scoring-description {
+  @include typescale.body-small;
+  color: var(--md-sys-color-outline);
+  font-style: italic;
+}
+
+.column {
+  @include common.flex-column;
+  gap: common.$spacing-medium;
+}
+
+.row {
+  @include common.flex-row-align-center;
+  gap: common.$spacing-medium;
+}
+
+.chip {
+  @include common.chip;
+  @include typescale.body-small;
+}
+
+.primary {
+  color: var(--md-sys-color-primary);
+}
+
+.divider {
+  border-bottom: 1px solid var(--md-sys-color-outline-variant);
+}

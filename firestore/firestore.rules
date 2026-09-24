@@ -1,0 +1,241 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Function: check if admin
+    function isAdmin() {
+      return get(/databases/$(database)/documents/allowlist/$(request.auth.token.email.lower())).data.get("isAdmin", null) != null;
+    }
+
+    // Function: checks if experimenter
+    function isExperimenter() {
+      return request.auth.uid != null && exists(/databases/$(database)/documents/allowlist/$(request.auth.token.email.lower()));
+    }
+
+    // Function: checks if public
+    function isPublic() {
+      return resource.data.permissions.visibility == "public";
+    }
+
+    // Function: checks if creator of resource
+    function isCreator() {
+      return lowerEquals(request.auth.token.email, resource.data.permissions.reader) || lowerEquals(request.auth.uid, resource.data.metadata.creator);
+    }
+
+    // Function: checks if read access (email listed in readers list)
+    function isReader() {
+      return includesReader(resource.data.permissions.readers, request.auth.token.email);
+    }
+
+    function lowerString(value) {
+      return value is string ? value.lower() : null;
+    }
+
+    function lowerEquals(a, b) {
+      let lowerA = lowerString(a);
+      let lowerB = lowerString(b);
+      return lowerA != null && lowerB != null && lowerA == lowerB;
+    }
+
+    function includesReader(readers, email) {
+      let emailLower = lowerString(email);
+      return readers != null && emailLower != null && readers.any(reader, reader is string && reader.lower() == emailLower);
+    }
+
+    // Function: checks if can edit experiment
+    function canEditExperiment(id) {
+      return isExperimenter() && (isExperimentCreator(id) || isPublicExperiment(id) || isExperimentReader(id) || isAdmin());
+    }
+
+    // Function: checks if creator of experiment
+    function isExperimentCreator(experimentId) {
+      let experiment = get(/databases/$(database)/documents/experiments/$(experimentId)).data;
+      let creator = lowerString(experiment.metadata.creator);
+      return creator != null && (creator == lowerString(request.auth.token.email) || creator == lowerString(request.auth.uid));
+    }
+
+    // Function: checks if experiment is public
+    function isPublicExperiment(experimentId) {
+      return get(/databases/$(database)/documents/experiments/$(experimentId)).data.permissions.visibility == "public";
+    }
+
+    // Function: checks if reader of experiment
+    function isExperimentReader(experimentId) {
+      return includesReader(
+        get(/databases/$(database)/documents/experiments/$(experimentId)).data.permissions.readers,
+        request.auth.token.email
+      );
+    }
+
+    // Experimenter allowlist
+    match /allowlist/{experimenterId} {
+      allow read: if isAdmin() || lowerEquals(request.auth.token.email, experimenterId);
+      allow update: if isAdmin();
+    }
+
+    // Experiment templates (experimenter only)
+    match /experimentTemplates/{templateId} {
+      allow list: if isExperimenter();
+      allow get: if isExperimenter() && (isPublic() || isCreator() || isReader() || isAdmin());
+
+      // Experiments can use `writeExperiment`, `deleteExperiment` endpoints
+      allow write: if false;
+    }
+
+    // Agent templates (experimenter only)
+    match /agentTemplates/{agentId} {
+      allow list: if isExperimenter();
+      allow get: if isExperimenter() && (isPublic() || isCreator() || isReader() || isAdmin());
+      allow write: if isExperimenter() && isCreator();
+    }
+
+    // Experimenter data (experimenter with matching ID only)
+    match /experimenterData/{experimenterId} {
+      allow list: if false;
+      allow get: if lowerEquals(experimenterId, request.auth.token.email) || lowerEquals(experimenterId, request.auth.uid);
+      allow write: if lowerEquals(experimenterId, request.auth.token.email) || lowerEquals(experimenterId, request.auth.uid);
+    }
+
+    // Experimenter profiles (experimenter only)
+    match /experimenters/{experimenterId} {
+      allow read: if true;
+      allow write: if lowerEquals(experimenterId, request.auth.token.email) || lowerEquals(experimenterId, request.auth.uid);
+
+      // Deliberate Lab API keys subcollection (only owner can read/write)
+      match /apiKeys/{keyId} {
+        allow read, write: if lowerEquals(experimenterId, request.auth.token.email) || lowerEquals(experimenterId, request.auth.uid);
+      }
+    }
+
+    // Experiments
+    match /experiments/{experimentId} {
+      allow get: if true;
+      allow list: if isExperimenter();
+
+      // Experimenters can use `writeExperiment`, `deleteExperiment` endpoints
+      allow write: if false;
+
+      match /alerts/{alertId} {
+        allow read: if isExperimenter();
+        allow write: if false; // Use cloud functions
+      }
+
+      match /logs/{logId} {
+        allow read: if isExperimenter();
+        allow write: if false; // Use cloud functions
+      }
+
+      match /stages/{stageId} {
+        allow read: if true; // Public read
+        // Experimenters can use `writeExperiment`, `deleteExperiment`
+        allow write: if false;
+      }
+
+      match /roles/{roleId} {
+        allow read: if true; // Public read
+        allow write: if isExperimenter();
+      }
+
+      match /agentMediators/{agentId} {
+        allow read: if isExperimenter();
+        allow write: if false; // Use cloud functions
+
+        match /prompts/{promptId} {
+          allow read: if isExperimenter();
+          allow write: if false; // Use cloud functions
+        }
+      }
+
+      match /agentParticipants/{agentId} {
+        allow read: if isExperimenter();
+        allow write: if false; // Use cloud functions
+
+        match /prompts/{promptId} {
+          allow read: if isExperimenter();
+          allow write: if false; // Use cloud functions
+        }
+      }
+
+      match /cohorts/{cohortId} {
+        allow get: if true; // Public read
+        allow list: if canEditExperiment(experimentId);
+
+        // Experimenters can use cloud function endpoints
+        allow write: if false;
+
+        match /publicStageData/{stageId} {
+          allow read: if true;
+
+          // TODO: Triggered by cloud function triggers
+          allow write: if false;
+
+          match /chats/{chatId} {
+            allow read: if true;
+            allow write: if false; // Write using cloud functions
+          }
+
+          match /triggerLogs/{logId} {
+            allow read: if true;
+            allow write: if false; // Write using cloud functions
+          }
+
+          match /logs/{logId} { // TODO: Refactor chip logs
+            allow read: if true;
+            allow write: if false; // Write using cloud functions
+          }
+
+          match /transactions/{transactionId} {
+            allow read: if true;
+            allow write: if false; // Write using cloud functions
+          }
+        }
+      }
+
+      match /mediators/{mediatorId} {
+        // TODO: Only allow experimenters to read mediators and use
+        // triggers to populate mediatorPublicData for participants
+        // to read
+        allow get: if true;
+        allow list: if true;
+
+        // Use cloud function endpoints
+        allow update: if false;
+      }
+
+      match /participants/{participantPrivateId} {
+        // TODO: Only allow experimenters to read participants and use
+        // triggers to populate participantPublicData for participants
+        // to read
+        allow list: if true;
+        allow get: if true; // Public read
+
+        // Participants can use cloud function endpoints
+        allow update: if false;
+
+        match /stageData/{stageId} {
+          allow read: if true;
+
+          // Participants can use cloud function endpoints
+          allow write: if false;
+
+          match /privateChats/{chatId} {
+            allow read: if true;
+            allow write: if false; // Use Cloud functions
+          }
+        }
+
+        match /alerts/{alertId} {
+          allow read: if true;
+          allow write: if false; // Use cloud functions
+        }
+      }
+
+      match /participantPublicData/{participantPublicId} {
+        allow list: if true;
+        allow get: if true;
+
+        // Triggered by cloud function triggers
+        allow write: if false;
+      }
+    }
+  }
+}
