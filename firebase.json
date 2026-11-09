@@ -24,8 +24,8 @@
   },
   "database": [
     {
-      "target": "rtdb-main",
-      "rules": "database.rules.json"
+      "instance": "srgame-28954-default-rtdb",
+      "rules": "firestore/database.rules.json"
     }
   ],
   "emulators": {
@@ -52,11 +52,31 @@
   },
   "hosting": {
     "public": "frontend/dist",
-    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "ignore": ["firebase.json", "/.*", "/node_modules/"],
     "rewrites": [
       {
-        "source": "**",
+        "source": "",
         "destination": "/index.html"
+      }
+    ],
+    "headers": [
+      {
+        "source": "*/.@(js|css)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public,max-age=31536000,immutable"
+          }
+        ]
+      },
+      {
+        "source": "/index.html",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "no-cache"
+          }
+        ]
       }
     ]
   }

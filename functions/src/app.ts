@@ -7,7 +7,7 @@ import * as admin from 'firebase-admin';
 // By default, cloud functions use a legacy db name (just the project id), whereas the rest of
 // firebase uses the new db name (project id + -default-rtdb).
 export const app = admin.initializeApp({
-  databaseURL: `https://${process.env.GCLOUD_PROJECT}-default-rtdb.firebaseio.com`,
+  databaseURL: `https://${process.env.GCLOUD_PROJECT}-default-rtdb.europe-west1.firebasedatabase.app`,
 });
 try {
   app.firestore().settings({ignoreUndefinedProperties: true});

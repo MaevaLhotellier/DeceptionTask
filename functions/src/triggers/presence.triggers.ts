@@ -13,7 +13,7 @@ export const mirrorPresenceToFirestore = onValueWritten(
   {
     ref: '/status/{experimentId}/{participantPrivateId}',
     instance: `${process.env.GCLOUD_PROJECT}-default-rtdb`,
-    region: 'us-central1',
+    region: 'europe-west1',
   },
   async (event) => {
     const {experimentId, participantPrivateId} = event.params;

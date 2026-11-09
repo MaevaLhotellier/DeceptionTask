@@ -3,7 +3,7 @@
  * All cloud functions are defined in their own files and imported here.
  */
 import {setGlobalOptions} from 'firebase-functions/v2';
-setGlobalOptions({region: 'us-central1', maxInstances: 1});
+setGlobalOptions({region: 'europe-west1', maxInstances: 20});
 
 // Endpoints called from frontend
 export * from './dl_api/dl_api.endpoints';

@@ -48,7 +48,7 @@ export class FirebaseService extends Service {
     this.app = initializeApp(FIREBASE_CONFIG);
     this.firestore = getFirestore(this.app);
     this.auth = getAuth(this.app);
-    this.functions = getFunctions(this.app, 'us-central1');
+    this.functions = getFunctions(this.app, 'europe-west1');
     this.storage = getStorage(this.app);
     this.rtdb = getDatabase(this.app);
 
