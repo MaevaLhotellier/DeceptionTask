@@ -191,7 +191,7 @@ export class SrTutorialOverlay extends MobxLitElement {
           {
             title: 'Score Table',
             content:
-              "Here is the score table that shows the potential earnings for both of you based on your choice. If you choose Alpha Market, you earn 30 and the advisor earns 20. If you choose Beta Market and it's busy, you earn 36 and the advisor earns 0. If you choose Beta Market and it's quiet, you earn 4 and the advisor earns 20.",
+              "Here is the score table that shows the potential earnings for both of you based on your choice. If you choose Alpha Market, you earn 20 and the advisor earns 30. If you choose Beta Market and it's busy, you earn 36 and the advisor earns 0. If you choose Beta Market and it's quiet, you earn 4 and the advisor earns 20.",
             side: 'right',
           },
           {

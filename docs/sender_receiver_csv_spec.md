@@ -174,8 +174,8 @@ Headers:  ...Receiver Saw Message Time | Receiver Submitted Time | Attention Che
 | 22 | **Round** | 当前轮次编号，从 1 开始 | 顺序递增 |
 | 23 | **True State** | 系统随机确定的真实状态，只有 sender 可见 | `1` 或 `2`。使用 `generateBalancedDefaults()` + seeded RNG，保证各 state 出现次数精确符合 `state1Probability` |
 | 24 | **Default Sender Choice** | 当 sender 超时时系统预设的默认选项 | `A` 或 `B`。基于 config 的 `defaultSenderChoice` 策略，若为 `random` 则用 seeded RNG 平衡分配 |
-| 25 | **Truthfulness Probability** | 该轮分配的 truthfulness 概率值 | 从 `truthfulnessOptions` 数组（如 `[0, 0.5, 1]`）中随机选一个。仅当 `enableTruthfulnessFeature=true` 时有值 |
-| 26 | **Is Honest Round** | 系统掷硬币结果：该轮推荐是否诚实 | `true`（诚实推荐对 receiver 有利的选项）/ `false`（推荐相反选项）。掷硬币: `rng.next() < truthfulnessProbability` |
+| 25 | **Truthfulness Probability** | 该轮系统默认消息为 "Beta Market is quiet"（`senderButtonLabel2`，即 System Recommendation = `B`）的概率 / Probability that the default message says "Beta Market is quiet" | 从 `truthfulnessOptions` 数组（如 `[0, 0.5, 1]`）中取值：`0` = 总是 "Busy"，`0.5` = 50/50，`1` = 总是 "Quiet"。仅当 `enableTruthfulnessFeature=true` 时有值 |
+| 26 | **Is Honest Round** | 已弃用 / Deprecated | 始终为 `false`（`computeTruthfulnessForRound` 不再使用该字段） |
 | 27 | **System Recommendation** | 系统生成的推荐选项 | `A` 或 `B`。honest=推荐 receiver payoff 更高的选项；dishonest=反转。仅当 `enableTruthfulnessFeature=true` 时有值 |
 
 **Seed 确定性**: 所有随机参数使用 `pairSeed = "${senderId}-${receiverId}-${stageId}"` 作为种子，确保同一对参与者在同一 stage 中每次运行结果一致。

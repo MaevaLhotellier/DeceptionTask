@@ -12,6 +12,21 @@ on human + LLM group dynamics.
 - 👉 [Quick start for developers](https://pair-code.github.io/deliberate-lab/developers/run-locally)
 - :📃 [Technical paper](https://arxiv.org/abs/2510.13011)
 
+## DeceptionTask: `truthfulnessOptions` coding
+
+In the sender-receiver (Advisor / Vendor) stage, each value of `truthfulnessOptions`
+is the probability that the automatic default message (sent when the Advisor times out)
+says **"Beta Market is quiet"**:
+
+| Value | Default message |
+|-------|-----------------|
+| `0`   | always "Beta Market is busy" |
+| `0.5` | 50 % "quiet", 50 % "busy" |
+| `1`   | always "Beta Market is quiet" |
+
+The automatic message is always about the Beta Market. See
+`computeTruthfulnessForRound` in `utils/src/stages/sender_receiver_stage.ts`.
+
 ## Citation
 
 📝 If you use Deliberate Lab in your work, please include the following citation:

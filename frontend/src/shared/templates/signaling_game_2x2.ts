@@ -595,7 +595,7 @@ The profitability of each market varies depending on customer flow, which only y
 >
 > There is a **${betaPercent}%** chance it says Beta Market **is quiet**.
 >
-> There is a **${alphaPercent}%** chance it says Alpha Market is **busy**`;
+> There is a **${alphaPercent}%** chance it says Beta Market is **busy**`;
 }
 
 const TUTORIAL = createSenderReceiverStage({
