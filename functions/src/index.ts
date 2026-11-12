@@ -2,8 +2,7 @@
  * Register all Firebase Cloud functions.
  * All cloud functions are defined in their own files and imported here.
  */
-import {setGlobalOptions} from 'firebase-functions/v2';
-setGlobalOptions({region: 'europe-west1', maxInstances: 20});
+import './global_options';
 
 // Endpoints called from frontend
 export * from './dl_api/dl_api.endpoints';
