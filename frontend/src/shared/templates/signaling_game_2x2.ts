@@ -252,8 +252,8 @@ This market has two possible states: half of the time it is **Busy**, and the ot
 | Market Options | Situation | Vendor's earnings | Advisor's earnings |
 | :--- | :--- | :---: | :---: |
 | Alpha Market | ⚪Stable | 20 | **30** |
-| Beta Exchange | 🔵Scenario 1: Busy | **36** | 0 |
-| (Beta Exchange) | 🔴Scenario 2: Quiet | 4 | 20 |
+| Beta Market | 🔵Scenario 1: Busy | **36** | 0 |
+| (Beta Market) | 🔴Scenario 2: Quiet | 4 | 20 |
 
 `,
   ],
@@ -1011,7 +1011,7 @@ const SURVEY_STAGE3 = createSurveyStage({
     createScaleSurveyQuestion({
       id: 'alloc_q1',
       questionTitle:
-        '### Please complete the 15 resource allocation items below.\n\nSelect your preferred distribution of earnings between yourself and one other participant. The other player is an anonymous participant who signed up for this study.\n\n### Bonus payment rule\n\nOne of these 5 chosen allocations will be randomly selected and added to your bonus payoff.\n\nConversion rate: 10 points = £0.04.\n\n### Item 1:',
+        '### Please complete the 15 resource allocation items below.\n\nSelect your preferred distribution of earnings between yourself and one other participant. The other player is an anonymous participant who signed up for this study.\n\n### Bonus payment rule\n\nOne of these 15 chosen allocations will be randomly selected and added to your bonus payoff.\n\nConversion rate: 10 points = £0.04.\n\n### Item 1:',
       lowerValue: 1,
       upperValue: 9,
       optionLabels: [
